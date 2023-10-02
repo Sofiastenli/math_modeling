@@ -1,5 +1,5 @@
-a= 'Good'
-b = 'Bad'
+a ='Good'
+b ='Bad'
 
 print(a + b)
 
