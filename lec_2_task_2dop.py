@@ -5,7 +5,7 @@ if a+b>c and a+c>b and c+b>a:
     print('треугольник существует')
     if a==b and a==c:
          print('треугольник равносторонний')
-    elif a==b and a!=c:
+    elif (a==b and a!=c) or (a==c and a!=b) or (c==b and a!=b):
         print('треугольник равнобедренный')
     else:
         print('треугольник разносторонний')
