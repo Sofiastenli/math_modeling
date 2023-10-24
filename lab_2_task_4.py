@@ -1,4 +1,9 @@
-a=int(input('введите число:'))
-for i in range(a):
-    print(i)
-    i=i+i
+a=1
+b=1
+for i in range(0,10,1):
+    c=a+b
+    a=b
+    b=c 
+    print(c)
+    
+    
