@@ -9,6 +9,9 @@ avogadro_constant = 6.02 * 10**23
 air_molar_mass = 0.029
 gas_constant = 8.31
 acceleration_gravity = 9.8
+bolcman_constant = 1.38 * 10 **(-23)
+euler_number = 2.718
+
 
 
 
