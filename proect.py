@@ -1,24 +1,31 @@
 import matplotlib.pyplot as plt 
 import numpy as np
 from matplotlib.animation import FuncAnimation
-
-first=(0.5 , 0.5)
-speed=0.01
-t=np.pi/4
-
 fig, ax = plt.subplots()
-anim_object, = plt.plot([], [], '-', lw=2)
-ax.set_xlim(0,1)
-ax.set_ylim(0,1)
 
-def update(t):
-    xdata.append(speed*np.cos(t))
-    ydata.append(speed*np.sin(t))
-    anim_object.set_data(xdata, ydata)
-    return anim_object,
+first=(0.5,0.5)
+t=(2*np.pi)
+xdata, ydata = [], []
 
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+anim_object, = plt.plot([], [], color='b', lw=2)
+anim_tail, = plt.plot([], [], color='r', lw=0.5)
+
+def animate(i):
+    x,y=first
+    x+=0.01*np.cos(t)
+    y+=0.01*np.sin(t)
+    anim_object.set_data([x,first[0]], [y,first[1]])
+    tail_x=np.linspace(first[0],xdata,15)
+    tail_y=np.linspace(first[1],ydata,15)
+    anim_tail.set_data(tail_x,tail_y)
+    return anim_object, anim_tail,
+
+
+ 
 ani = FuncAnimation(fig,
-                    update,
+                    animate,
                     interval=10
                     )
 ani.save('animation_5.gif')
