@@ -1,33 +1,43 @@
-import matplotlib.pyplot as plt 
 import numpy as np
-from matplotlib.animation import FuncAnimation
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+A1, f1 = 1, 1
+A2, f2 = 0.5, 2
+
+
 fig, ax = plt.subplots()
-
-first=(0.5,0.5)
-t=(2*np.pi)
-xdata, ydata = [], []
-
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
-anim_object, = plt.plot([], [], color='b', lw=2)
-anim_tail, = plt.plot([], [], color='r', lw=0.5)
-
-def animate(i):
-    x,y=first
-    x+=0.01*np.cos(t)
-    y+=0.01*np.sin(t)
-    anim_object.set_data([x,first[0]], [y,first[1]])
-    tail_x=np.linspace(first[0],xdata,15)
-    tail_y=np.linspace(first[1],ydata,15)
-    anim_tail.set_data(tail_x,tail_y)
-    return anim_object, anim_tail,
+ax.set_xlim(0, 10)
+ax.set_ylim(-2, 2)
 
 
- 
-ani = FuncAnimation(fig,
-                    animate,
-                    interval=10
-                    )
-ani.save('animation_5.gif')
+line1, = ax.plot([], [], label='A=1, f=1')
+line2, = ax.plot([], [], label='A=0.5, f=2')
+
+
+def init():
+    line1.set_data([], [])
+    line2.set_data([], [])
+    
+    return line1, line2, 
+
+
+def update(frame):
+    t = np.linspace(0, frame, 100)
+    y1 = A1 * np.sin(f1 * t)
+    y2 = A2 * np.sin(f2 * t)
+    
+    line1.set_data(t, y1)
+    line2.set_data(t, y2)
+    
+    
+    
+    return line1, line2, 
+
+
+ani = animation.FuncAnimation(fig, update, frames=100, init_func=init)
+
+plt.legend()
+plt.show()
 
 
