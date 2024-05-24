@@ -4,7 +4,7 @@ from scipy import interpolate
 import shapely.geometry as geom
 
 phi = np.linspace(0, 2*np.pi,40)
-r = 0.5 + np.cos(phi)
+r = 1
 x = r * np.cos(phi)
 y = r * np.sin(phi)
 
