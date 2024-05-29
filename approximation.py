@@ -61,6 +61,17 @@ x=1000 +250*np.cos(t)
 y=850-90*np.sin(t)
 ax.plot(x,y,'-',lw=2,color='r')
 
+x = [0,0]
+y = [370,899]
+ax.plot(x,y,'-',lw=2,color='r')
+
+x = [0,1199]
+y = [899,899]
+ax.plot(x,y,'-',lw=2,color='r')
+
+x = [1199,1199]
+y = [800,899]
+ax.plot(x,y,'-',lw=2,color='r')
 
 
 

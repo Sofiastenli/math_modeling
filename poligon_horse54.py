@@ -3,18 +3,38 @@ import numpy as np
 from scipy import interpolate
 import shapely.geometry as geom
 
+img = plt.imread('head.jpg')
+fig, ax = plt.subplots()
+ax.imshow(img)
+
+
+x13 = [1199.1,1199.02]
+y13 = [800.01,899.03]
+
+
+x14 = [0,1199]
+y14= [899.1,899.2]
+
+
+x = np.append(x13, x14)
+y = np.append(y13, y14)
+
+
 x15= [0.01,0.02]
 y15 = [370.01,899]
 
 
 
 
+x = np.append(x, x15)
+y = np.append(y, y15)
+
 t1=np.linspace(np.pi/2, np.pi/4.8 ,200)
 x1=0 + 380*np.cos(t1)
 y1=800-430*np.sin(t1)
 
-x = np.append(x15, x1)
-y = np.append(y15, y1)
+x = np.append(x, x1)
+y = np.append(y, y1)
 
 
  
@@ -51,7 +71,13 @@ x = np.append(x, x5)
 y = np.append(y, y5)
 
 
+t6=np.linspace(np.pi*2, np.pi+np.pi/2 ,200)
+x6=480.1 + 75*np.cos(t6)
+y6=270-80*np.sin(t6)
 
+
+x = np.append(x, x6)
+y = np.append(y, y6)
 
 x7 = [550,700]
 y7 = [270.1,330]
@@ -96,24 +122,12 @@ y12=850.1-90*np.sin(t12)
 x = np.append(x, x12)
 y = np.append(y, y12)
 
-x13 = [1199.1,1199.02]
-y13 = [800.01,899.03]
 
-x = np.append(x, x13)
-y = np.append(y, y13)
-
-
-x14 = [0,1199]
-y14= [899.1,899.2]
-
-x = np.append(x, x14)
-y = np.append(y, y14)
 
 
 
 spline_coords, figure_spline_part = interpolate.splprep([x, y], s=0)
-spline_curve = interpolate.splev(figure_spline_part, spline_coords)
-
+spline_curve=interpolate.splev(figure_spline_part, spline_coords)
 
 
 curve_coords=[]
@@ -121,9 +135,9 @@ for i in range(len(spline_curve[0])):
     curve_coords.append([spline_coords[0][i],spline_curve[1][i]])
 
 polygon = geom.Polygon(curve_coords)
-points_nuber_per_side=2000
-x_pictures_limits=[-1 , 1201]
-y_pictures_limits=[200,1000]
+points_nuber_per_side=100
+x_pictures_limits=[-0.5 , 2]
+y_pictures_limits=[-1,1]
 
 for x_point_coord in np.linspace(*x_pictures_limits, points_nuber_per_side):
     for y_point_coord in np.linspace(*y_pictures_limits, points_nuber_per_side):
@@ -133,8 +147,7 @@ for x_point_coord in np.linspace(*x_pictures_limits, points_nuber_per_side):
     
 
 
-plt.plot(x, y, 'bo')
+
 plt.plot(spline_curve[0], spline_curve[1],'g')
 plt.axis('equal')
-plt.savefig('INTERPOL.png')
-
+plt.savefig('picture_poligon_horse86.png')

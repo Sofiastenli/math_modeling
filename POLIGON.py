@@ -3,6 +3,12 @@ import numpy as np
 from scipy import interpolate
 import shapely.geometry as geom
 
+img = plt.imread('head.jpg')
+fig, ax = plt.subplots()
+ax.imshow(img)
+
+
+
 x15= [0.01,0.02]
 y15 = [370.01,899]
 
@@ -110,10 +116,8 @@ x = np.append(x, x14)
 y = np.append(y, y14)
 
 
-
 spline_coords, figure_spline_part = interpolate.splprep([x, y], s=0)
-spline_curve = interpolate.splev(figure_spline_part, spline_coords)
-
+spline_curve=interpolate.splev(figure_spline_part, spline_coords)
 
 
 curve_coords=[]
@@ -121,9 +125,9 @@ for i in range(len(spline_curve[0])):
     curve_coords.append([spline_coords[0][i],spline_curve[1][i]])
 
 polygon = geom.Polygon(curve_coords)
-points_nuber_per_side=2000
-x_pictures_limits=[-1 , 1201]
-y_pictures_limits=[200,1000]
+points_nuber_per_side=100
+x_pictures_limits=[0 , 1200]
+y_pictures_limits=[0,900]
 
 for x_point_coord in np.linspace(*x_pictures_limits, points_nuber_per_side):
     for y_point_coord in np.linspace(*y_pictures_limits, points_nuber_per_side):
@@ -133,8 +137,7 @@ for x_point_coord in np.linspace(*x_pictures_limits, points_nuber_per_side):
     
 
 
-plt.plot(x, y, 'bo')
+
 plt.plot(spline_curve[0], spline_curve[1],'g')
 plt.axis('equal')
-plt.savefig('INTERPOL.png')
-
+plt.savefig('POBBDJD.png')

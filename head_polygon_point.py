@@ -3,22 +3,17 @@ import numpy as np
 from scipy import interpolate
 import shapely.geometry as geom
 
-img = plt.imread('head.jpg')
-fig, ax = plt.subplots()
-ax.imshow(img)
 
-x0 = [0,0]
-y0 = [370,900]
-ax.plot(x0,y0,'-',lw=2,color='r')
+
+
 
 
 t1=np.linspace(np.pi/2, np.pi/4.8 ,200)
 x1=0 + 380*np.cos(t1)
 y1=800-430*np.sin(t1)
-ax.plot(x1,y1,'-',lw=2,color='r')
+ax.plot(x,y,'-',lw=2,color='r')
 
-x = np.append(x0, x1)
-y = np.append(y0, y1)
+
  
 
 t2=np.linspace(np.pi, np.pi/2.6 ,200)
@@ -26,8 +21,8 @@ x2=450+150*np.cos(t2)
 y2=530 -40*np.sin(t2)
 ax.plot(x2,y2,'-',lw=2,color='r')
 
-x = np.append(x, x2)
-y = np.append(y, y2)
+x = np.append(x1, x2)
+y = np.append(y1, y2)
 
 x3 = [510,570.1]
 y3 = [490.1,360]
@@ -104,17 +99,28 @@ ax.plot(x12,y12,'-',lw=2,color='r')
 x = np.append(x, x12)
 y = np.append(y, y12)
 
-x13 = [0,0]
-y13 = [780,900]
-ax.plot(x0,y0,'-',lw=2,color='r')
+
+x13= [0,0]
+y13 = [370,899]
+ax.plot(x,y,'-',lw=2,color='r')
 
 x = np.append(x, x13)
 y = np.append(y, y13)
 
-x14 = [0.1,1200.1]
-y14 = [900,900]
-ax.plot(x0,y0,'-',lw=2,color='r')
 
+x14 = [0,1199]
+y14 = [899,899]
+ax.plot(x,y,'-',lw=2,color='r')
+
+x = np.append(x, x14)
+y = np.append(y, y14)
+
+x15 = [1199,1199]
+y15 = [800,899]
+ax.plot(x,y,'-',lw=2,color='r')
+
+x = np.append(x, x15)
+y = np.append(y, y15)
 
 
 
