@@ -3,33 +3,19 @@ import numpy as np
 from scipy import interpolate
 import shapely.geometry as geom
 
-x15= [0.01,0.02]
-y15 = [370.01,899]
-
-
-
-
 t1=np.linspace(np.pi/2, np.pi/4.8 ,200)
 x1=0 + 380*np.cos(t1)
 y1=800-430*np.sin(t1)
-
-x = np.append(x15, x1)
-y = np.append(y15, y1)
-
-
- 
 
 t2=np.linspace(np.pi, np.pi/2.6 ,200)
 x2=450+150*np.cos(t2)
 y2=530 -40*np.sin(t2)
 
-
-x = np.append(x, x2)
-y = np.append(y, y2)
+x = np.append(x1, x2)
+y = np.append(y1, y2)
 
 x3 = [510,570.1]
 y3 = [490.1,360]
-
 
 x = np.append(x, x3)
 y = np.append(y, y3)
@@ -49,9 +35,6 @@ y5=380 -30*np.sin(t5)
 
 x = np.append(x, x5)
 y = np.append(y, y5)
-
-
-
 
 x7 = [550,700]
 y7 = [270.1,330]
@@ -109,27 +92,38 @@ y14= [899.1,899.2]
 x = np.append(x, x14)
 y = np.append(y, y14)
 
+x15 = [0,0]
+y15= [900,370]
+
+x = np.append(x, x15)
+y = np.append(y, y15)
+
+# x = [0, 300,530,580,440,440,540,720,780,680,790,800,1200,1200,0,0]
+# y = [370,520,450,380,390,330,280,370,390,630,640,840,790,900,900,370]
 
 
-spline_coords, figure_spline_part = interpolate.splprep([x, y], s=0)
+spline_coords, figure_spline_part = interpolate.splprep([x,y], s = 0)
 spline_curve = interpolate.splev(figure_spline_part, spline_coords)
+# plt.plot(spline_curve[0], spline_curve[1], color  = 'g', lw = 4)
 
-
-
-curve_coords=[]
-for i in range(len(spline_curve[0])):
-    curve_coords.append([spline_coords[0][i],spline_curve[1][i]])
+curve_coords = []
+for i in range (len(spline_curve[0])):
+    curve_coords.append([spline_curve[0][i],spline_curve[1][i] ])
 
 polygon = geom.Polygon(curve_coords)
-points_nuber_per_side=2000
-x_pictures_limits=[-1 , 1201]
-y_pictures_limits=[200,1000]
+points_number_per_side = 500
 
-for x_point_coord in np.linspace(*x_pictures_limits, points_nuber_per_side):
-    for y_point_coord in np.linspace(*y_pictures_limits, points_nuber_per_side):
-        p=geom.Point(x_point_coord, y_point_coord)
+x_pictures_limits=[0, 1200]
+y_pictures_limits=[0, 1000]
+
+points_coords = []
+
+for x_point_coord in np.linspace (*x_pictures_limits,points_number_per_side):
+    for y_point_coord in np.linspace(*y_pictures_limits, points_number_per_side):
+        p = geom.Point (x_point_coord, y_point_coord)
         if p.within(polygon):
-            plt.plot(x_point_coord,y_point_coord, 'go' ,ms=0.5)
+            plt.plot (x_point_coord, y_point_coord, 'ro', ms = 0.5)
+        
     
 
 
